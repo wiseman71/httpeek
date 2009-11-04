@@ -52,26 +52,24 @@
 			private var sockets:Array;
 			[Bindable] private var networkInterfaces:ArrayCollection;
 
-			private var networkInfo:NetworkInfo;
 
 			private function onCreationComplete():void
 			{
 				this.nativeWindow.addEventListener(Event.CLOSING, onClosing);
-				this.networkInfo = new NetworkInfo();
-				this.networkInfo.addEventListener(Event.CHANGE, onNetworkInterfaceChange);
+				NetworkInfo.networkInfo.addEventListener(Event.CHANGE, onNetworkInterfaceChange);
 				this.onNetworkInterfaceChange(null);
 			}
 			
 			private function onNetworkInterfaceChange(e:Event=null):void
 			{
 				this.networkInterfaces = new ArrayCollection();
-				var networkInfo:NetworkInfo = new NetworkInfo();
-				var allNetworkInterfaces:Vector.<NetworkInterface> = networkInfo.findInterfaces();
+				var allNetworkInterfaces:Vector.<NetworkInterface> = NetworkInfo.networkInfo.findInterfaces();
 				for each (var networkInterface:NetworkInterface in allNetworkInterfaces)
 				{
 					var allAddresses:Vector.<InterfaceAddress> = networkInterface.addresses;
 					for each (var address:InterfaceAddress in allAddresses)
 					{
+						if (address.address.length == 0) continue;
 						this.networkInterfaces.addItem(address.address);
 					}
 				}
@@ -118,7 +116,7 @@
 					Alert.show(e.message, "Error", Alert.OK);
 					return;
 				}
-				//this.debugButton.enabled = true;
+				this.debugButton.enabled = true;
 			}
 			
 			private function onConnect(e:ServerSocketConnectEvent):void
@@ -177,7 +175,7 @@
 			<mx:Label text="Port:" fontWeight="bold"/>
 			<mx:TextInput id="portNumber" text="8888" width="40"/>
 			<mx:Button id="listenButton" label="Listen" click="onSocketChange(event);"/>
-			<!--<mx:Button id="debugButton" label="Debug" click="onDebug(event);" enabled="false"/>-->
+			<mx:Button id="debugButton" label="Debug" click="onDebug(event);" enabled="false"/>
 			<mx:Button label="Clear" click="onClear(event);" enabled="{output.text.length &gt; 0}"/>
 		</mx:HBox>
 		<mx:TextArea width="100%" height="100%" id="output" editable="false"/>
