@@ -181,7 +181,7 @@ package com.adobe.httpeek
 			}
 			else if (this.responseChunked)
 			{
-				if (this.isChungedResponseDone(this.responseBuffer))
+				if (this.isChunkedResponseDone(this.responseBuffer))
 				{
 					this.done();
 				}
@@ -192,7 +192,7 @@ package com.adobe.httpeek
 			}
 		}
 
-		private function isChungedResponseDone(response:ByteArray):Boolean
+		private function isChunkedResponseDone(response:ByteArray):Boolean
 		{
 			response.position = 0;
 			var headerTest:String = new String();
