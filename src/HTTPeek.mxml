@@ -98,6 +98,7 @@
 					onClosing(null);
 					this.listenButton.label = "Listen";
 				}
+				this.output.text = "";
 			}
 
 			private function onListen():void
@@ -168,6 +169,20 @@
 
 		]]>
 	</mx:Script>
+	<mx:String id="instructions">
+		Before HTTPeek will work, you need to configure either your operating system's,
+		or your browser's, proxy settings to use HTTPeek as a proxy.
+		
+		The easiest thing to do is use the manual proxy configuration in Firefox.
+		Go to Advnaced > Network, then click on "Settings..." under "Configure how
+		Firefox connects to the Internet."
+		
+		Choose "Manual proxy configuraiton" and use the IP address and the port number
+		specified above.
+		
+		HTTPeek will not start listening for incoming connections until the
+		"Listen" button is clicked.
+	</mx:String>
 	<mx:VBox width="100%" height="100%" verticalGap="0">
 		<mx:HBox width="100%" paddingTop="4" paddingLeft="4" paddingRight="4" paddingBottom="4">
 			<mx:Label text="IP Address:" fontWeight="bold"/>
@@ -178,6 +193,6 @@
 			<mx:Button id="debugButton" label="Debug" click="onDebug(event);" enabled="false"/>
 			<mx:Button label="Clear" click="onClear(event);" enabled="{output.text.length &gt; 0}"/>
 		</mx:HBox>
-		<mx:TextArea width="100%" height="100%" id="output" editable="false"/>
+		<mx:TextArea width="100%" height="100%" id="output" editable="false" text="{instructions}"/>
 	</mx:VBox>
 </mx:WindowedApplication>
