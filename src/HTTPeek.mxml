@@ -98,11 +98,11 @@
 					onClosing(null);
 					this.listenButton.label = "Listen";
 				}
-				this.output.text = "";
 			}
 
 			private function onListen():void
 			{
+				this.output.text = "";
 				this.sockets = new Array();
 				this.server = new ServerSocket();
 				this.server.addEventListener(Event.CONNECT, onConnect);
