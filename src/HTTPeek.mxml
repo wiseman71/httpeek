@@ -162,8 +162,8 @@
 			{
 				this.output.text += ("bound: " + this.server.bound + "\n");
 				this.output.text += ("listening: " + this.server.listening + "\n");
-				this.output.text += ("port: " + this.server.port + "\n");
-				this.output.text += ("address: " + this.server.address + "\n" + HR);
+				this.output.text += ("port: " + this.server.localPort + "\n");
+				this.output.text += ("address: " + this.server.localAddress + "\n" + HR);
 				this.output.text += ("open sockets: " + this.sockets.length + "\n" + HR);
 			}
 
